@@ -1,5 +1,8 @@
 package de.hub.mse.ttc2020.benchmark;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -14,9 +17,13 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 	public void task_1_M1_M2_M1_a() throws IOException {
 		System.out.println("\n= Task 1 M1->M2->M1 (a)");
 
+
 		EPackage model1 = getModel(pathScenario1 + "models/V1.ecore");
 		EPackage model2 = getModel(pathScenario1 + "models/V2.ecore");
 		EObject input = getInstance(pathScenario1 + "instances/input/V1a.xmi");
+		EObject expout = getInstance(pathScenario1 + "instances/expout/V1a.xmi");
+
+
 		System.out.println(PrettyPrinter.printModel(model1));
 		System.out.println(PrettyPrinter.printModel(model2));
 		System.out.println("Input " + PrettyPrinter.printInstance(input));
@@ -28,10 +35,10 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		System.out.println("Migrated " + PrettyPrinter.printInstance(migrated));
 		System.out.println("Migrated Back " + PrettyPrinter.printInstance(migratedBack));
 
-		EObject expout = getInstance(pathScenario1 + "instances/expout/V1a.xmi");
+
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -55,7 +62,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario1 + "instances/expout/V1b.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -79,7 +86,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario1 + "instances/expout/V2a.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -103,7 +110,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario1 + "instances/expout/V2b.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -127,7 +134,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario2 + "instances/expout/V1a.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -151,7 +158,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario2 + "instances/expout/V1b.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -175,7 +182,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario2 + "instances/expout/V2a.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -199,7 +206,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario2 + "instances/expout/V2b.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -223,7 +230,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario3 + "instances/expout/V1a.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -254,7 +261,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario3 + "instances/expout/V1b.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -271,14 +278,14 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		AbstractTask task = taskFactory.createTask(TaskInfo.TASK_3_M2_M1_M2, model1, model2);
 
 		EObject migrated = task.migrate(input);
-		EObject migratedBack = task.migrateBack(migrated);
 		System.out.println("Migrated " + PrettyPrinter.printInstance(migrated));
+		EObject migratedBack = task.migrateBack(migrated);
 		System.out.println("Migrated Back " + PrettyPrinter.printInstance(migratedBack));
 
 		EObject expout = getInstance(pathScenario3 + "instances/expout/V2a.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -309,7 +316,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario3 + "instances/expout/V2b.xmi");
 		System.out.println("Expected " + PrettyPrinter.printInstance(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -334,7 +341,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario4 + "instances/expout/V1a.xmi");
 		System.out.println("Expected " + PrettyPrinter.printContainer(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -359,7 +366,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario4 + "instances/expout/V1b.xmi");
 		System.out.println("Expected " + PrettyPrinter.printContainer(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -386,7 +393,7 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario4 + "instances/expout/V2a.xmi");
 		System.out.println("Expected " + PrettyPrinter.printContainer(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 
 	@Test
@@ -413,6 +420,6 @@ public class AllFunctionalTests extends AbstractBenchmarkTests {
 		EObject expout = getInstance(pathScenario4 + "instances/expout/V2b.xmi");
 		System.out.println("Expected " + PrettyPrinter.printContainer(expout));
 
-		assertTrue(isEqual(migratedBack, expout));
+		assertThat(PrettyPrinter.printInstance(migratedBack), equalTo(PrettyPrinter.printInstance(expout)));
 	}
 }

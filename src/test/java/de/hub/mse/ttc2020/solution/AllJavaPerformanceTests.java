@@ -6,17 +6,21 @@ import org.junit.BeforeClass;
 import de.hub.mse.ttc2020.benchmark.AllFunctionalTests;
 import de.hub.mse.ttc2020.benchmark.PerformanceTests;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class AllJavaPerformanceTests extends PerformanceTests {
 
 	@BeforeClass
 	public static void init() throws CoreException {
+		Logger.getGlobal().setLevel(Level.SEVERE);
 		AllFunctionalTests.init();
 		
 		AllFunctionalTests.taskFactory = new JavaTaskFactory();
 		
-		AllFunctionalTests.pathScenario1 = "../de.hub.mse.ttc2020.benchmark/data/scenario1/";
-		AllFunctionalTests.pathScenario2 = "../de.hub.mse.ttc2020.benchmark/data/scenario2/";
-		AllFunctionalTests.pathScenario3 = "../de.hub.mse.ttc2020.benchmark/data/scenario3/";
-		AllFunctionalTests.pathScenario4 = "../de.hub.mse.ttc2020.benchmark/data/scenario4/";
+		AllFunctionalTests.pathScenario1 = "./data/scenario1/";
+		AllFunctionalTests.pathScenario2 = "./data/scenario2/";
+		AllFunctionalTests.pathScenario3 = "./data/scenario3/";
+		AllFunctionalTests.pathScenario4 = "./data/scenario4/";
 	}
 }
